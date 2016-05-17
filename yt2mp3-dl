@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# MP3 Playlist downloader from Youtube
+#
+
+YOUTUBE_DL_FILE="/usr/bin/youtube-dl"
+SCRIPT_VERSION="0.1"
+SCRIPT_DATE="2016-05-17"
+SCRIPT_AUTHOR="Dominik Szynk"
+
+if [ -f "$YOUTUBE_DL_FILE" ]
+then
+	if [ $# -lt "1" ]
+	then
+		echo
+		echo "Script for downloading  and converting Youtube videos to MP3 file"
+		echo "Author: $SCRIPT_AUTHOR | Script date: $SCRIPT_DATE |  Script version: $SCRIPT_VERSION"
+		echo
+		echo "Script usage:"
+		echo "      yt2mp3-dl link_to_youtube_playlist"
+		echo
+		exit $E_NOARGS
+	fi
+else
+	echo
+	echo "yt2mp3 warning: Install youtube-dl first!";
+	echo
+	exit $E_NOARGS
+fi
+
+echo
+echo "Downloading and converting YT playlist to mp3..."
+youtube-dl -x --audio-format mp3 $1
+echo
+echo "Playlist downloaded..."
+echo
